@@ -6,15 +6,22 @@ Develop a program that asks the user for an integer 4-digit number and calculate
 """
 
 
-def read_int(hint: str) -> int:
+def read_4_digit_int() -> int:
     while True:
         try:
-            return int(input(hint))
+            number = int(input("Enter an integer 4-digit number: "))
         except ValueError:
             print("Please enter a valid integer")
+        else:
+            if 1000 <= number <= 9999:
+                return number
+            print("Please enter an integer 4-digit number")
 
+number = read_4_digit_int()
 
-n = 4
-integers = [read_int(f"Enter int {i}/{n}: ") for i in range(1, n + 1)]
+digits = []
+while number > 0:
+    digits.append(number % 10)
+    number = number // 10
 
-print(" + ".join(str(number) for number in integers), "=", sum(integers))
+print(" + ".join(str(digit) for digit in digits[::-1]), "=", sum(digits))
